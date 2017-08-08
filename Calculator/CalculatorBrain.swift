@@ -60,8 +60,7 @@ struct CalculatorBrain {
         }
        
     }
-    
-    
+        
     
     private mutating func performPendingBinaryOperation(){
         if pendingBinaryOperation != nil && accumulator != nil{
