@@ -8,13 +8,13 @@
 
 import Foundation
 
-func changeSign(operand: Double) -> Double {
+/*func changeSign(operand: Double) -> Double {
     return -operand
 }
 
 func multiply(op1: Double, op2: Double) ->Double {
     return op1*op2
-}
+}*/
 
 struct CalculatorBrain {
     
@@ -32,11 +32,12 @@ struct CalculatorBrain {
         "e"     :   Operation.constant(M_E), //M_E,
         "√"     :   Operation.unaryOperation(sqrt), //sqrt,
         "cos"   :   Operation.unaryOperation(cos), //cos,
-        "±"     :   Operation.unaryOperation(changeSign),
-        "x"     :   Operation.binaryOperation(multiply),
+        "±"     :   Operation.unaryOperation({ -$0}),
+        "x"     :   Operation.binaryOperation({$0 * $1}),
+        "÷"     :   Operation.binaryOperation({$0 / $1}),
+        "+"     :   Operation.binaryOperation({$0 + $1}),
+        "-"     :   Operation.binaryOperation({$0 - $1}),
         "="     :   Operation.equals
-        
-    
     ]
     
     mutating func performOperation(_ symbol: String) {
@@ -60,7 +61,7 @@ struct CalculatorBrain {
         }
        
     }
-        
+    
     
     private mutating func performPendingBinaryOperation(){
         if pendingBinaryOperation != nil && accumulator != nil{
