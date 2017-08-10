@@ -15,16 +15,30 @@ class ViewController: UIViewController {
     
     var userIsInTheMiddleOfTyping = false
     
+    var decimalUsed = false
+    
     //buttons
     @IBAction func touchDigit(_ sender: UIButton) {
-        let digit = sender.currentTitle!
-        if userIsInTheMiddleOfTyping {
+       
+            let digit = sender.currentTitle!
+
+            
+            if userIsInTheMiddleOfTyping {
+                if digit == "." && decimalUsed == true {
+                    return
+                } else if digit == "." && decimalUsed == false {
+                    decimalUsed = true
+            }
+        
+        
+       
             let textCurrentlyInDisplay = display.text!
             display.text = textCurrentlyInDisplay + digit
         } else {
             display.text = digit
-            userIsInTheMiddleOfTyping = true
         }
+            userIsInTheMiddleOfTyping = true
+        
     }
     
     var displayValue: Double {
